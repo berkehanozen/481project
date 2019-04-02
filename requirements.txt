@@ -11,4 +11,5 @@ requests-futures
 soupsieve
 stem
 torrequest
+tweepy
 urllib3
