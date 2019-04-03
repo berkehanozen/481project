@@ -21,6 +21,8 @@ class InstagramParse(object):
             likes = []
             urls = []
             user = scr['entry_data']['ProfilePage'][0]['graphql']['user']
+
+
             
             userInfo.append(user['edge_owner_to_timeline_media']['count'])
             userInfo.append(user['edge_followed_by']['count'])
