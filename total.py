@@ -1,6 +1,6 @@
 import os
 from analysis_functions import GoogleCloud
-
+from ImageAnalyzer import ImageAnalyzer
 
 class Analyze(object):
     @staticmethod
@@ -12,41 +12,41 @@ class Analyze(object):
         return len(output) != 3
     
     @staticmethod
-    def entityAnalysis(output, type, options, query=""):
+    def entityAnalysis(output, type, options_txt, options_img, query=""):
         d = GoogleCloud()
-        if(type == 0):
-            if(not Analyze.isTwitterPublic(output)):
+        if type == 0:
+            if not Analyze.isTwitterPublic(output):
                     return "Protected account."
         else:
-            if(not Analyze.isInstagramPublic(output)):
+            if not Analyze.isInstagramPublic(output):
                     print("User's profile is private.")
                     return "Protected account."
-        if(options[0] == 1):
-            if(type == 0):
-                k = 1
-                arr = output[0]
-                for i in arr:
-                    print('************************************************************')
-                    print('{} {}'.format('Tweet',k))
-                    print('************************************************************')
-                    GoogleCloud.classify_text(i) 
-                    k = k+1
-            else:    
-                k = 1
-                arr = output[1]
-                for i in arr:
-                    print('************************************************************')
-                    print('{} {}'.format('Insta',k))
-                    print('************************************************************')
-                    GoogleCloud.classify_text(i) 
-                    k = k+1
-        if(options[1] == 1):
-            k = 1
-            if(type == 0):
-                arr = output[0]
+
+        k = 1
+        arr_txt = output[0] if type == 0 else output[1]
+        arr_img = output[5] if type == 0 else output[3]
+        for i, j in zip(arr_txt, arr_img):
+            print('************************************************************')
+            if type == 0:
+                print('{} {}'.format('Tweet', k))
             else:
-                arr = output[1]
-            for i in arr:
+                print('{} {}'.format('Insta', k))
+            print('************************************************************')
+            if options_txt[0] == 1:
+                GoogleCloud.classify_text(i)
+            if options_txt[2] == 1:
+                GoogleCloud.entity_sentiment_analysis(i)
+                GoogleCloud.text_sentiment_analysis(i)
+            if len(j) !=0:
+                ImageAnalyzer.analyze_and_print_from_url(j, options_img[0], options_img[1], options_img[2], options_img[3])
+            else:
+                print("No image found.\n")
+            k = k+1
+
+        if options_txt[1] == 1:
+            k = 1
+            arr_txt = output[0] if type == 0 else output[1]
+            for i in arr_txt:
                 if(type == 0):
                     f = open("resources/tweet{}.txt".format(k), "w", errors='ignore')
                 else:
@@ -58,25 +58,4 @@ class Analyze(object):
             GoogleCloud.query_category('texts.json', query)
             list = os.listdir('resources')
             for i in list:
-                os.remove('resources/{}'.format(i))    
-        if(options[2] == 1):
-            if(type == 0):
-                k = 1
-                arr = output[0]
-                for i in arr:
-                    print('************************************************************')
-                    print('{} {}'.format('Tweet',k))
-                    print('************************************************************')
-                    GoogleCloud.entity_sentiment_analysis(i) 
-                    GoogleCloud.text_sentiment_analysis(i)
-                    k = k+1
-            else:    
-                k = 1
-                arr = output[1]
-                for i in arr:
-                    print('************************************************************')
-                    print('{} {}'.format('Insta',k))
-                    print('************************************************************')
-                    GoogleCloud.entity_sentiment_analysis(i) 
-                    GoogleCloud.text_sentiment_analysis(i)
-                    k = k+1
+                os.remove('resources/{}'.format(i))
