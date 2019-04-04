@@ -437,6 +437,18 @@ def main():
                         action="store",
                         help="One or more usernames to check with social networks."
                         )
+    parser.add_argument("--entity", "-e",
+                       action = "store_true", dest="entity", default = False,
+                       help="Option to conduct entity analysis on the texts."
+                       )
+    parser.add_argument("--sentiment", "-s",
+                       action = "store_true", dest="sentiment", default = False,
+                       help="Option to conduct sentiment analysis on the texts."
+                       )
+    parser.add_argument("--query", "-q", metavar='QUERY_NAME',
+                       action = "store", dest="query", default = None,
+                       help="Option to conduct entity analysis on the texts."
+                       )
 
     args = parser.parse_args()
 
@@ -616,25 +628,35 @@ def main():
                                      results[site]['response_time_ms']
                                      ]
                                     )
+        options = [0, 0, 0]
+        query = ""
+        if args.entity:
+            options[0] = 1
+        if args.sentiment:
+            options[2] = 1
+        if args.query is not None:
+            options[1] = 1
+            query = args.query
         if(twitter == 1):
-            checkTwitter(username)
+            print("as")
+            checkTwitter(username, options, query)
         if(instagram == 1):
-            checkInstagram(username)
+            checkInstagram(username, options, query)
         
         twitter = 0
         instagram = 0
 
-def checkTwitter(userId, query=""):
+def checkTwitter(userId, options, query=""):
     t = TweetStuff()
     d = Analyze()
 
-    Analyze.entityAnalysis(TweetStuff.getTweets(userId), 0, [1, 0, 1], [True, True, True, True], query)     #todo Adding Sherlock arguments for image and text
+    Analyze.entityAnalysis(TweetStuff.getTweets(userId), 0, options, [True, True, True, True], query)     #todo Adding Sherlock arguments for image and text
 
-def checkInstagram(userId, query=""):
+def checkInstagram(userId, options,  query=""):
     f = InstaStuff()
     d = Analyze()
 
-    Analyze.entityAnalysis(InstaStuff.parser(userId), 1, [1, 0 , 1], [True, True, True, True], query)       #todo Adding Sherlock arguments for image and text
+    Analyze.entityAnalysis(InstaStuff.parser(userId), 1, options, [True, True, True, True], query)       #todo Adding Sherlock arguments for image and text
 
 if __name__ == "__main__":
     main()
