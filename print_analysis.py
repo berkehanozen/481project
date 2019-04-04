@@ -1,6 +1,6 @@
 import os
-from analysis_functions import GoogleCloud
-from ImageAnalyzer import ImageAnalyzer
+from Text_Analyzer import GoogleCloud
+from Image_Analyzer import ImageAnalyzer
 
 class Analyze(object):
     @staticmethod

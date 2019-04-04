@@ -8,7 +8,7 @@ networks.
 """
 from main import TweetStuff
 from Parser import InstaStuff
-from total import Analyze
+from print_analysis import Analyze
 
 import csv
 import json

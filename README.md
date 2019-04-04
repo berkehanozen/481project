@@ -22,6 +22,8 @@
 **NOTE**: Python 3.6 or higher is required.
 
 ```bash
+# if you don't have one, create an Google Cloud account(1 year free trial) and set your credentials as environement path: GOOGLE_APPLICATION_CREDENTIALS
+
 # clone the repo
 $ git clone https://github.com/sherlock-project/sherlock.git
 
@@ -41,10 +43,12 @@ $ python3 sherlock.py --help
 usage: sherlock.py [-h] [--version] [--verbose] [--rank]
                    [--folderoutput FOLDEROUTPUT] [--output OUTPUT] [--tor]
                    [--unique-tor] [--csv] [--site SITE_NAME]
-                   [--proxy PROXY_URL] [--json JSON_FILE]
+                   [--proxy PROXY_URL] [--json JSON_FILE] [--entity]
+                   [--sentiment] [--query QUERY_NAME] [--face]
+                   [--webentity] [--label] [--landmark]
                    USERNAMES [USERNAMES ...]
 
-Sherlock: Find Usernames Across Social Networks (Version 0.5.7)
+Sherlock_Enchanced: Find Usernames Across Social Networks and Analyze the Tweets and Instagram Posts (Version 0.5.7.1)
 
 positional arguments:
   USERNAMES             One or more usernames to check with social networks.
@@ -79,6 +83,15 @@ optional arguments:
   --print-found
 			Prints only found messages. Errors, and invalid
 			username errors will not appear.
+  --entity              Option to conduct entity analysis on the texts.
+  --sentiment           Option to conduct sentiment analysis on the texts.
+  --query QUERY_NAME
+                        Option to conduct entity analysis on the texts.
+  --face                Option to conduct analysis on the faces in the images.
+  --webentity           Option to conduct web analysis on the entities in the iamges.
+  --label               Option to conduct analysis on the labels in the images.
+  --landmark            Option to conduct analysis on the landmarks in the images.
+  
 ```
 
 For example, run ```python3 sherlock.py user123```, and all of the accounts

@@ -5,6 +5,7 @@ chardet
 colorama
 google-cloud-vision
 google-cloud-storage
+google-cloud-language
 idna
 lxml
 PySocks
@@ -15,3 +16,5 @@ stem
 torrequest
 tweepy
 urllib3
+numpy
+six
