@@ -30,14 +30,17 @@ class InstaStuff(object):
 
             for i in range(0,min(5,len(pics))):
                 urls.append(pics[i]['node']['display_url'])
-                description.append(pics[i]['node']['edge_media_to_caption']['edges'][0]['node']['text'])
+                if len(pics[i]['node']['edge_media_to_caption']['edges']) > 0:  #if the pic has no description don't get index out of bounds exception
+                    description.append(pics[i]['node']['edge_media_to_caption']['edges'][0]['node']['text'])
+                else:
+                    description.append('')
                 likes.append(pics[i]['node']['edge_liked_by']['count'])
 
             retArr = []
             retArr.append(userInfo)
             retArr.append(description)
             retArr.append(likes)
-            retArr.append(pics)
+            retArr.append(urls)
             return retArr
         except:
             data = source.find_all('meta', attrs={'property': 'og:description'
@@ -56,6 +59,3 @@ class InstaStuff(object):
             exarray.append(following)
 
             return exarray
-
-
-
