@@ -157,24 +157,34 @@ class ImageAnalyzer:
             string += cls.__concatLine("")
         return prefix + string + postfix
 
-    @classmethod
-    def analyze_from_url(cls, url, search_in_web_entities, search_in_faces, search_in_labels, search_in_landmarks):
-        # Calls respective analysis methods according to the boolean parameters and appends the return strings to an array if requested
-
-        arr = []
-        if search_in_web_entities:
-            arr.append(cls.__detect_web_entities(url))
-        if search_in_faces:
-            arr.append(cls.__detect_faces(url))
-        if search_in_labels:
-            arr.append(cls.__detect_labels(url))
-        if search_in_landmarks:
-            arr.append(cls.__detect_landmarks(url))
-        return arr
+    '''Disabled method since'''
+    '''Too slow for the flow of console for waiting for all of analysis to end and print as bulk'''
+    # @classmethod
+    # def analyze_from_url(cls, url, search_in_web_entities, search_in_faces, search_in_labels, search_in_landmarks):
+    #     # Calls respective analysis methods according to the boolean parameters and appends the return strings to an array if requested
+    #
+    #     arr = []
+    #     if search_in_web_entities:
+    #         arr.append(cls.__detect_web_entities(url))
+    #     if search_in_faces:
+    #         arr.append(cls.__detect_faces(url))
+    #     if search_in_labels:
+    #         arr.append(cls.__detect_labels(url))
+    #     if search_in_landmarks:
+    #         arr.append(cls.__detect_landmarks(url))
+    #     return arr
 
     @classmethod
     def analyze_and_print_from_url(cls, url, search_in_web_entities, search_in_faces, search_in_labels, search_in_landmarks):
         # Analyzes and prints according to respective boolean parameters
-        analyses = cls.analyze_from_url(url, search_in_web_entities, search_in_faces, search_in_labels, search_in_landmarks)
-        for analysis in analyses:
-            print(analysis)
+        if search_in_web_entities:
+            print(cls.__detect_web_entities(url))
+        if search_in_faces:
+            print(cls.__detect_faces(url))
+        if search_in_labels:
+            print(cls.__detect_labels(url))
+        if search_in_landmarks:
+            print(cls.__detect_landmarks(url))
+        # analyses = cls.analyze_from_url(url, search_in_web_entities, search_in_faces, search_in_labels, search_in_landmarks)
+        # for analysis in analyses:
+        #     print(analysis)
