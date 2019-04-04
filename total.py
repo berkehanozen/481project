@@ -48,9 +48,9 @@ class Analyze(object):
                 arr = output[1]
             for i in arr:
                 if(type == 0):
-                    f = open("resources/tweet{}.txt".format(k), "w")
+                    f = open("resources/tweet{}.txt".format(k), "w", errors='ignore')
                 else:
-                    f = open("resources/insta{}.txt".format(k), "w")
+                    f = open("resources/insta{}.txt".format(k), "w", errors='ignore')
                 f.write(i)
                 f.close()
                 k = k+1
