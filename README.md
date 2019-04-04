@@ -92,6 +92,18 @@ optional arguments:
   --label               Option to conduct analysis on the labels in the images.
   --landmark            Option to conduct analysis on the landmarks in the images.
   
+supported languages for text analysis:    
+  Chinese (Simplified)	zh
+  Chinese (Traditional)	zh-Hant
+  English	en
+  French	fr
+  German	de
+  Italian	it
+  Japanese	ja
+  Korean	ko
+  Portuguese (Brazilian & Continental)	pt
+  Spanish
+  
 ```
 
 For example, run ```python3 sherlock.py user123```, and all of the accounts
