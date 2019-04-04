@@ -30,7 +30,7 @@ class Analyze(object):
             if type == 0:
                 print('{} {}'.format('Tweet', k))
             else:
-                print('{} {}'.format('Insta', k))
+                print('{} {}'.format('Post', k))
             print('************************************************************')
             if options_txt[0] == 1:
                 GoogleCloud.classify_text(i)

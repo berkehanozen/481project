@@ -4,7 +4,7 @@ import requests
 import json
 
 
-class InstaStuff(object):
+class ParsePosts(object):
     def parser(username):
         r = requests.get("https://www.instagram.com/"+username+"/?hl=tr")
         source = BeautifulSoup(r.content,"html.parser")

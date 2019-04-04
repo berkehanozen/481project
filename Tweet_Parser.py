@@ -7,7 +7,7 @@ auth = tweepy.OAuthHandler('EQxFiVurRxZRKZzH4tJ2PtsX8', '59WSgueMvx7VUbuYywwC6rq
 auth.set_access_token("349586645-4e7WmYpjvzKUmsKh3C9pNyv0QzlbVB80nlvR4q02", "qblYvvigttmP5elDFMsIJacO7gOknN794ubMThlyV0pfj")
 api = tweepy.API(auth)
 
-class TweetStuff(object):
+class ParseTweets(object):
     @staticmethod
     def getTweets(userId):
         user=api.get_user(userId)

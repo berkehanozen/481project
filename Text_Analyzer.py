@@ -33,7 +33,7 @@ class GoogleCloud(object):
                 print(u'{:<16}: {}'.format('name', category.name))
                 print(u'{:<16}: {}'.format('confidence', category.confidence))
         except:
-            print('Too few words.')
+            print('Length of the text is not enough for the tool to categorize it.')
 
         client = language.LanguageServiceClient()
 

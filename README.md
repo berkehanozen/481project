@@ -86,9 +86,9 @@ optional arguments:
   --entity              Option to conduct entity analysis on the texts.
   --sentiment           Option to conduct sentiment analysis on the texts.
   --query QUERY_NAME
-                        Option to conduct entity analysis on the texts.
+                        Option to conduct a query on the tweets based on the categories given in the CONTENT_CATEGORIES file.
   --face                Option to conduct analysis on the faces in the images.
-  --webentity           Option to conduct web analysis on the entities in the iamges.
+  --webentity           Option to conduct web analysis on the entities in the images.
   --label               Option to conduct analysis on the labels in the images.
   --landmark            Option to conduct analysis on the landmarks in the images.
   

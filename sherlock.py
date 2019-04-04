@@ -6,8 +6,8 @@ Sherlock: Find Usernames Across Social Networks Module
 This module contains the main logic to search for usernames at social
 networks.
 """
-from main import TweetStuff
-from Parser import InstaStuff
+from Tweet_Parser import ParseTweets
+from Instagram_Parser import ParsePosts
 from print_analysis import Analyze
 
 import csv
@@ -662,16 +662,16 @@ def main():
         instagram = 0
 
 def checkTwitter(userId, text_options, image_options, query=""):
-    t = TweetStuff()
+    t = ParseTweets()
     d = Analyze()
 
-    Analyze.entityAnalysis(TweetStuff.getTweets(userId), 0, text_options, image_options, query)     #todo Adding Sherlock arguments for image and text
+    Analyze.entityAnalysis(ParseTweets.getTweets(userId), 0, text_options, image_options, query)     #todo Adding Sherlock arguments for image and text
 
 def checkInstagram(userId, text_options, image_options,  query=""):
-    f = InstaStuff()
+    f = ParsePosts()
     d = Analyze()
 
-    Analyze.entityAnalysis(InstaStuff.parser(userId), 1, text_options, image_options, query)       #todo Adding Sherlock arguments for image and text
+    Analyze.entityAnalysis(ParsePosts.parser(userId), 1, text_options, image_options, query)       #todo Adding Sherlock arguments for image and text
 
 if __name__ == "__main__":
     main()
