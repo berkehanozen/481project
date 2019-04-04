@@ -16,21 +16,28 @@ class Analyze(object):
         d = GoogleCloud()
         if type == 0:
             if not Analyze.isTwitterPublic(output):
-                    return "Protected account."
+                return "Protected account."
+            else:
+                print("Twitter:\nTweets: {}, Following: {}, Followers: {}\n".format(output[2], output[3], output[4]))
         else:
             if not Analyze.isInstagramPublic(output):
-                    print("User's profile is private.")
-                    return "Protected account."
+                print("Instagram:\nPosts: {}, Followers: {}, Following: {}\n".format(output[0], output[1], output[2]))
+                print("User's profile is private.")
+                return "Protected account."
+            else:
+                print("Posts: {}, Followers: {}, Following: {}\n".format(output[0][0], output[0][1], output[0][2]))
 
         k = 1
+        arr_extraInfo = output[1] if type == 0 else output[2]
         arr_txt = output[0] if type == 0 else output[1]
         arr_img = output[5] if type == 0 else output[3]
+        d = 0
         for i, j in zip(arr_txt, arr_img):
             print('************************************************************')
             if type == 0:
-                print('{} {}'.format('Tweet', k))
+                print('{} {}\tDate: {}'.format('Tweet', k, arr_extraInfo[d]))
             else:
-                print('{} {}'.format('Post', k))
+                print('{} {}\tLikes: {}'.format('Post', k, arr_extraInfo[d]))
             print('************************************************************')
             if options_txt[0] == 1:
                 GoogleCloud.classify_text(i)
@@ -42,6 +49,7 @@ class Analyze(object):
             else:
                 print("No image found.\n")
             k = k+1
+            d = d+1
 
         if options_txt[1] == 1:
             k = 1
