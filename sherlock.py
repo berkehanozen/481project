@@ -628,13 +628,13 @@ def checkTwitter(userId, query=""):
     t = TweetStuff()
     d = Analyze()
 
-    Analyze.entityAnalysis(TweetStuff.getTweets(userId), 0, [1,0,1], query)
+    Analyze.entityAnalysis(TweetStuff.getTweets(userId), 0, [1, 0, 1], [True, True, True, True], query)     #todo Adding Sherlock arguments for image and text
 
 def checkInstagram(userId, query=""):
     f = InstaStuff()
     d = Analyze()
-  
-    Analyze.entityAnalysis(InstaStuff.parser(userId), 1, [1,0,1], query)
-    
+
+    Analyze.entityAnalysis(InstaStuff.parser(userId), 1, [1, 0 , 1], [True, True, True, True], query)       #todo Adding Sherlock arguments for image and text
+
 if __name__ == "__main__":
     main()
