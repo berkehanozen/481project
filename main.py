@@ -26,25 +26,25 @@ class TweetStuff(object):
                 tweetTexts.append(tweet.full_text)  #getting full text for self tweets
         tweetDates=[[tweet.created_at]for tweet in timeline]#taking tweet dates
         imageUrls=[]
-        for tweet in timeline:#taking image urls of tweets's if it has
+        for tweet in timeline:
             if 'media' in tweet.entities:
                 for media in tweet.extended_entities['media']:
                     imageUrls.append(media['media_url'])
             else:
                 imageUrls.append("")
         dates=[]
-        for t in tweetDates: #string manipulation for better looking  (DD/MM/YYYY)
+        for t in tweetDates:
             for i in t:
                 date=str(i).split(" ")[0].split("-")
                 dates.append(date[2]+"."+date[1]+"."+date[0])
         profileImage=user.profile_image_url
-        informations=[]#Adding all informations to the informations array
-        informations.append(tweetTexts)##zerothfirst index tweet texts(contains an array)
-        informations.append(dates)##first index dates(contains an array)
-        informations.append(tweetCount)##second index (tweet count only an integer)
-        informations.append(followingCount)##third index(following count an integer)
-        informations.append(followerCount)##fourth index(followerCount an integer)
-        informations.append(imageUrls)##fifth index(image Urls an array)
+        informations=[]
+        informations.append(tweetTexts)
+        informations.append(dates)
+        informations.append(tweetCount)
+        informations.append(followingCount)
+        informations.append(followerCount)
+        informations.append(imageUrls)
         informations.append(profileImage)
         # for info in informations:
         #     print(info)
