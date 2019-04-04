@@ -449,6 +449,22 @@ def main():
                        action = "store", dest="query", default = None,
                        help="Option to conduct entity analysis on the texts."
                        )
+    parser.add_argument("--face", "-f",
+                       action = "store_true", dest="face", default = False,
+                       help="Option to conduct analysis on the faces in the images."
+                       )
+    parser.add_argument("--webentity", "-w",
+                       action = "store_true", dest="web_entity", default = False,
+                       help="Option to conduct web analysis on the entities in the iamges."
+                       )
+    parser.add_argument("--label", "-l",
+                       action = "store_true", dest="label", default = False,
+                       help="Option to conduct analysis on the labels in the images."
+                       )
+    parser.add_argument("--landmark", "-la",
+                       action = "store_true", dest="landmark", default = False,
+                       help="Option to conduct analysis on the landmarks in the images."
+                       )
 
     args = parser.parse_args()
 
@@ -628,35 +644,34 @@ def main():
                                      results[site]['response_time_ms']
                                      ]
                                     )
-        options = [0, 0, 0]
+        
+        text_options = [args.entity, 0, args.sentiment]
         query = ""
-        if args.entity:
-            options[0] = 1
-        if args.sentiment:
-            options[2] = 1
         if args.query is not None:
-            options[1] = 1
+            text_options[1] = 1
             query = args.query
+        
+        image_options = [args.web_entity, args.face, args.label, args.landmark]
+            
         if(twitter == 1):
-            print("as")
-            checkTwitter(username, options, query)
+            checkTwitter(username, text_options, image_options, query)
         if(instagram == 1):
-            checkInstagram(username, options, query)
+            checkInstagram(username, text_options, image_options, query)
         
         twitter = 0
         instagram = 0
 
-def checkTwitter(userId, options, query=""):
+def checkTwitter(userId, text_options, image_options, query=""):
     t = TweetStuff()
     d = Analyze()
 
-    Analyze.entityAnalysis(TweetStuff.getTweets(userId), 0, options, [True, True, True, True], query)     #todo Adding Sherlock arguments for image and text
+    Analyze.entityAnalysis(TweetStuff.getTweets(userId), 0, text_options, image_options, query)     #todo Adding Sherlock arguments for image and text
 
-def checkInstagram(userId, options,  query=""):
+def checkInstagram(userId, text_options, image_options,  query=""):
     f = InstaStuff()
     d = Analyze()
 
-    Analyze.entityAnalysis(InstaStuff.parser(userId), 1, options, [True, True, True, True], query)       #todo Adding Sherlock arguments for image and text
+    Analyze.entityAnalysis(InstaStuff.parser(userId), 1, text_options, image_options, query)       #todo Adding Sherlock arguments for image and text
 
 if __name__ == "__main__":
     main()
