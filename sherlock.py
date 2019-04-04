@@ -653,9 +653,9 @@ def main():
         
         image_options = [args.web_entity, args.face, args.label, args.landmark]
             
-        if(twitter == 1):
+        if(twitter == 1 and (text_options != [0, 0, 0] or image_options != [0,0,0,0])):
             checkTwitter(username, text_options, image_options, query)
-        if(instagram == 1):
+        if(instagram == 1 and (text_options != [0, 0, 0] or image_options != [0,0,0,0])):
             checkInstagram(username, text_options, image_options, query)
         
         twitter = 0
@@ -665,13 +665,13 @@ def checkTwitter(userId, text_options, image_options, query=""):
     t = ParseTweets()
     d = Analyze()
 
-    Analyze.entityAnalysis(ParseTweets.getTweets(userId), 0, text_options, image_options, query)     #todo Adding Sherlock arguments for image and text
+    Analyze.entityAnalysis(ParseTweets.getTweets(userId), 0, text_options, image_options, query)
 
 def checkInstagram(userId, text_options, image_options,  query=""):
     f = ParsePosts()
     d = Analyze()
 
-    Analyze.entityAnalysis(ParsePosts.parser(userId), 1, text_options, image_options, query)       #todo Adding Sherlock arguments for image and text
+    Analyze.entityAnalysis(ParsePosts.parser(userId), 1, text_options, image_options, query)      
 
 if __name__ == "__main__":
     main()
