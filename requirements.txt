@@ -3,6 +3,8 @@ bs4
 certifi
 chardet
 colorama
+google-cloud-vision
+google-cloud-storage
 idna
 lxml
 PySocks
@@ -11,4 +13,5 @@ requests-futures
 soupsieve
 stem
 torrequest
+tweepy
 urllib3
